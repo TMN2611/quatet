@@ -1,0 +1,25 @@
+.headerLogo {
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.productLink {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.nav {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+.navList {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+.navItem {
+  margin: 0 1rem;
+}
