@@ -15,7 +15,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
-  const [isSnackBarOpen, setSnackBarOpen] = useState(true);
+  const [isSnackBarOpen, setSnackBarOpen] = useState(false);
 
   const handleClose = () => {
     setSnackBarOpen(false);
@@ -30,6 +30,7 @@ function App() {
           console.log(product.data());
         });
       });
+    setSnackBarOpen(true);
   }, []);
   return (
     <>
