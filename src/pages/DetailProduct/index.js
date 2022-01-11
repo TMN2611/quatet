@@ -1,9 +1,12 @@
 import React from 'react';
-
-export default function DetailProduct() {
+import { Container } from '@mui/material';
+import { useParams } from 'react-router-dom';
+export default function DetailProduct({ id }) {
+  const { productId } = useParams();
+  console.log(productId);
   return (
-    <div>
-      <h2>DetailProduct</h2>
-    </div>
+    <Container maxWidth={'lg'}>
+      <h2>DetailProduct {id}</h2>
+    </Container>
   );
 }

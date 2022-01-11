@@ -1,31 +1,49 @@
 import React, { useEffect, useState } from 'react';
+import firebase from './firebase';
 import { Routes, Route } from 'react-router-dom';
 import { Snackbar, Alert, Slide } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 // pages
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Contact from './pages/Contact';
 import DetailProduct from './pages/DetailProduct';
 import NotFound from './pages/NotFound';
 
 // component
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 function App() {
   const [isSnackBarOpen, setSnackBarOpen] = useState(true);
+
   const handleClose = () => {
     setSnackBarOpen(false);
   };
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('Products')
+      .get()
+      .then(products => {
+        products.forEach(product => {
+          console.log(product.data());
+        });
+      });
+  }, []);
   return (
     <>
       <Header />
 
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/product' element={<Products />}>
-          <Route path='1' element={<DetailProduct />}></Route>
-        </Route>
+        <Route path='/san-pham' element={<Products />}></Route>
+        <Route path='/lien-he' element={<Contact />}></Route>
         <Route path='*' element={<NotFound />} />
+        <Route
+          path={'/san-pham/:productId'}
+          element={<DetailProduct />}
+        ></Route>
       </Routes>
 
       <Snackbar

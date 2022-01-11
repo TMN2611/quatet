@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '@mui/material';
+import Particles from '../Particle';
+import styles from './Footer.module.css';
 export default function Footer() {
+  useEffect(() => {});
   return (
-    <Container maxWidth={'lg'}>
-      <h2>Footer</h2>
-    </Container>
+    <div style={{ background: 'black', overflow: 'hidden' }}>
+      <Particles className={styles.particles}>
+        <Container maxWidth={'lg'}></Container>
+      </Particles>
+    </div>
   );
 }

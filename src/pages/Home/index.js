@@ -9,7 +9,7 @@ export default function Home() {
     <Container maxWidth={'lg'}>
       <h2>Home</h2>
 
-      <Link to='product'>HAHA</Link>
+      <Link to='san-pham'>HAHA</Link>
     </Container>
   );
 }

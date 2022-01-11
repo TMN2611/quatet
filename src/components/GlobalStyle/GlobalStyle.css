@@ -7,3 +7,6 @@ html {
   font-family: 'Roboto', sans-serif;
   color: black;
 }
+#tsparticles {
+  height: 300px;
+}
