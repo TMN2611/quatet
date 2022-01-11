@@ -46,22 +46,24 @@ function App() {
         ></Route>
       </Routes>
 
-      <Snackbar
-        open={isSnackBarOpen}
-        autoHideDuration={6000}
-        TransitionComponent={Slide}
-        onClose={handleClose}
-      >
-        <Alert
-          icon={<FavoriteIcon />}
+      {isSnackBarOpen ? (
+        <Snackbar
+          open={isSnackBarOpen}
+          autoHideDuration={6000}
+          TransitionComponent={Slide}
           onClose={handleClose}
-          variant='filled'
-          severity='error'
-          sx={{ width: '100%' }}
         >
-          Chào mừng bạn đến với ZOLO
-        </Alert>
-      </Snackbar>
+          <Alert
+            icon={<FavoriteIcon />}
+            onClose={handleClose}
+            variant='filled'
+            severity='error'
+            sx={{ width: '100%' }}
+          >
+            Chào mừng bạn đến với ZOLO
+          </Alert>
+        </Snackbar>
+      ) : null}
 
       <Footer />
     </>
