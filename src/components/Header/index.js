@@ -18,9 +18,9 @@ import { Container, Grid } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const mobileNavClass = ClassNames({
+const mobileNavLogoClass = ClassNames({
   [styles.headerLogo]: true,
-  [styles.hiddenOnMobile]: true,
+  [styles.hiddenOnMobileAndTablet]: true,
 });
 
 const mobileHolineClass = ClassNames({
@@ -120,7 +120,11 @@ export default function ButtonAppBar() {
               </IconButton>
             </div>
             <Link to='/'>
-              <img src='/images/logo.png' alt='' className={mobileNavClass} />
+              <img
+                src='/images/logo.png'
+                alt=''
+                className={mobileNavLogoClass}
+              />
             </Link>
             <div className={styles.nav}>
               <ul className={styles.navList}>

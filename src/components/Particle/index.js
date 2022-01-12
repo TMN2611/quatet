@@ -1,6 +1,6 @@
 import React from 'react';
 import Particles from 'react-tsparticles';
-export default function Particle() {
+export default function Particle({ countdownTitle, goal }) {
   const particlesInit = main => {
     // console.log(main);
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
@@ -16,7 +16,7 @@ export default function Particle() {
       loaded={particlesLoaded}
       height='50vh'
       options={{
-        autoPlay: true,
+        autoPlay: countdownTitle === goal ? true : false,
         background: {
           color: {
             value: '#000',

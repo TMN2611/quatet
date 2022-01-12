@@ -10,11 +10,24 @@
   border-radius: 50px;
   border: 0.5px solid rgba(255, 255, 255, 0.733);
 }
-.countdownTitle {
+.countdownTitle,
+.LunarYear {
   text-align: center;
-  font-size: 50px;
+  font-size: 20px;
   color: #fffabc;
   text-transform: uppercase;
+}
+.LunarYear {
+  font-size: 70px;
+  font-family: 'Dancing Script', serif;
+}
+.LunarWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LunarIcon {
+  height: 100px;
 }
 .countdownItem {
   padding: 20px;
