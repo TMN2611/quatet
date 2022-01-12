@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ClassNames from 'classnames';
 import { AppBar, Box, Toolbar, Typography, Badge, Button } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
@@ -12,12 +13,40 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
 import { Container, Grid } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
-console.log(styles);
+
+const mobileNavClass = ClassNames({
+  [styles.headerLogo]: true,
+  [styles.hiddenOnMobile]: true,
+});
+
+const mobileHolineClass = ClassNames({
+  [styles.headerHotlineBtn]: true,
+  [styles.hiddenOnMobile]: true,
+});
+
 export default function ButtonAppBar() {
   let navigate = useNavigate();
+  const params = useLocation();
+
+  const [isFireWorkPage, setIsFireWorkPage] = useState(() => {
+    if (params.pathname === '/phao-hoa') return true;
+    else return false;
+  });
+
+  const navCartClass = ClassNames({
+    [styles.headerCart]: true,
+    [styles.hiddenOnMobile]: true,
+  });
+
+  useEffect(() => {
+    if (params.pathname === '/phao-hoa') return setIsFireWorkPage(true);
+    else return setIsFireWorkPage(false);
+  });
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -43,11 +72,20 @@ export default function ButtonAppBar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <Link to='/'>
+        <img src='/images/logo.png' alt='' className={styles.headerLogo} />
+      </Link>
+
       <List>
         {[
           { name: 'GIỚI THIỆU', icon: HomeIcon, path: '/' },
           { name: 'SẢN PHẨM', icon: CardGiftcardIcon, path: '/san-pham' },
           { name: 'LIÊN HỆ', icon: ContactPhoneIcon, path: '/lien-he' },
+          {
+            name: 'PHÁO HOA',
+            icon: LocalFireDepartmentOutlinedIcon,
+            path: '/phao-hoa',
+          },
         ].map((item, index) => (
           <ListItem
             button
@@ -65,9 +103,9 @@ export default function ButtonAppBar() {
     </Box>
   );
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, zIndex: 2 }}>
       <AppBar position='static' color='transparent'>
-        <Container maxWidth='lg'>
+        <Container maxWidth='lg' className={styles.header}>
           <Toolbar disableGutters>
             <div className={styles.navToggleBtn}>
               <IconButton
@@ -82,47 +120,70 @@ export default function ButtonAppBar() {
               </IconButton>
             </div>
             <Link to='/'>
-              <img
-                src='/images/logo.png'
-                alt=''
-                className={styles.headerLogo}
-              />
+              <img src='/images/logo.png' alt='' className={mobileNavClass} />
             </Link>
             <div className={styles.nav}>
               <ul className={styles.navList}>
                 <li className={styles.navItem}>
                   <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    <Link to='/' className={styles.productLink}>
+                    <Link
+                      to='/'
+                      className={styles.productLink}
+                      style={{ color: isFireWorkPage ? 'white' : 'black' }}
+                    >
                       Giới thiệu
                     </Link>
                   </Typography>
                 </li>
                 <li className={styles.navItem}>
                   <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    <Link to='/san-pham' className={styles.productLink}>
+                    <Link
+                      to='/san-pham'
+                      className={styles.productLink}
+                      style={{ color: isFireWorkPage ? 'white' : 'black' }}
+                    >
                       Sản phẩm
                     </Link>
                   </Typography>
                 </li>
                 <li className={styles.navItem}>
                   <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    <Link to='/lien-he' className={styles.productLink}>
+                    <Link
+                      to='/lien-he'
+                      className={styles.productLink}
+                      style={{ color: isFireWorkPage ? 'white' : 'black' }}
+                    >
                       Liên hệ
+                    </Link>
+                  </Typography>
+                </li>
+                <li className={styles.navItem}>
+                  <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+                    <Link
+                      to='/phao-hoa'
+                      className={styles.productLink}
+                      style={{ color: isFireWorkPage ? 'white' : 'black' }}
+                    >
+                      Xem pháo hoa
                     </Link>
                   </Typography>
                 </li>
               </ul>
             </div>
-            <div className={styles.headerCart}>
+
+            <div className={navCartClass}>
               <Badge badgeContent={4} color='error'>
-                <AddShoppingCartIcon color='action' />
+                <AddShoppingCartIcon
+                  color='action'
+                  style={{ color: isFireWorkPage ? 'white' : 'black' }}
+                />
               </Badge>
             </div>
             <Button
               href='tel:0962165084'
               variant='contained'
               color='error'
-              className={styles.headerHotlineBtn}
+              className={mobileHolineClass}
             >
               Hotline
             </Button>

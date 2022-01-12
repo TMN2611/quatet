@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Contact from './pages/Contact';
 import DetailProduct from './pages/DetailProduct';
+import Firework from './pages/Firework';
 import NotFound from './pages/NotFound';
 
 // component
@@ -40,6 +41,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/san-pham' element={<Products />}></Route>
         <Route path='/lien-he' element={<Contact />}></Route>
+        <Route path='/phao-hoa' element={<Firework />}></Route>
         <Route path='*' element={<NotFound />} />
         <Route
           path={'/san-pham/:productId'}
