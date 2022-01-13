@@ -17,8 +17,7 @@ const Countdown = ({ setCountdownTitle, goal }) => {
 
   const handleCalculatorCountdown = () => {
     const now = new Date();
-    const Tet = new Date(2022, 0, 12, 21, 0);
-    console.log(Tet);
+    const Tet = new Date(2022, 0, 32);
     const currentTime = now.getTime();
     const TetTime = Tet.getTime();
 
@@ -59,7 +58,8 @@ const Countdown = ({ setCountdownTitle, goal }) => {
       {countdownTime.map((item, index) => {
         return (
           <li key={index} className={styles.countdownItem}>
-            {item.value} {item.title}{' '}
+            <div className={styles.timeValue}> {item.value} </div>
+            <div className={styles.timeTitle}>{item.title} </div>
           </li>
         );
       })}
@@ -67,35 +67,30 @@ const Countdown = ({ setCountdownTitle, goal }) => {
   );
 };
 export default function Firework() {
-  const [countdownTitle, setCountdownTitle] = useState('Đợi một chút');
+  const [countdownTitle, setCountdownTitle] = useState(
+    'Đếm ngược đến giao thừa xuân Nhâm dần'
+  );
   const [isPlay, setPlay] = React.useState(true);
 
-  const goal = 'Đừng buồn nữa nhá ';
+  const goal = 'Chúc mừng năm mới xuân';
 
   const audioRef = useRef();
 
-  useEffect(() => {
-    // if (countdownTitle === goal) {
-    //   // audioRef.current.audioEl.current.play();
-    //   console.log([audioRef.current.audioEl.current]);
-    // }
-    // console.log(countdownTitle === goal);
-  }, [countdownTitle]);
   return (
-    <div style={{ marginTop: 40 }}>
+    <div className={styles.fireWorkWrapper}>
       <Particles countdownTitle={countdownTitle} goal={goal}></Particles>
       <h2 className={styles.countdownTitle}>{countdownTitle}</h2>
       {countdownTitle === goal ? (
         <div>
           <div className={styles.LunarWrapper}>
             <img
-              src='https://cdn-icons-png.flaticon.com/512/6525/6525850.png'
+              src='./images/tiger.png'
               className={styles.LunarIcon}
               alt='tiger'
             />
-            <p className={styles.LunarYear}>Ngọt xinh đẹp </p>
+            <p className={styles.LunarYear}>Nhâm dần</p>
             <img
-              src='https://cdn-icons.flaticon.com/png/512/2682/premium/2682341.png?token=exp=1641994222~hmac=cc948217bead5d3f0c66d59598c8f4a4'
+              src='./images/firework.png'
               className={styles.LunarIcon}
               alt='tiger'
             />

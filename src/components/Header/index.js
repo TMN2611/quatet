@@ -14,7 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 

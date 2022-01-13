@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import firebase from './firebase';
+import db from './config/firebase';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  where,
+  serverTimestamp,
+  orderBy,
+} from 'firebase/firestore';
 import { Routes, Route } from 'react-router-dom';
-import { Snackbar, Alert, Slide } from '@mui/material';
+import { Snackbar, Alert, Slide, Button } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useStore, actions } from './store';
+
 // pages
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -15,23 +29,32 @@ import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+// colref
+const productCollection = collection(db, 'Products');
+
 function App() {
+  const [state, dispatch] = useStore();
   const [isSnackBarOpen, setSnackBarOpen] = useState(false);
 
   const handleClose = () => {
     setSnackBarOpen(false);
   };
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('Products')
-      .get()
-      .then(products => {
-        products.forEach(product => {
-          console.log(product.data());
-        });
+    const ascNamequery = query(productCollection, orderBy('name'));
+    const unsub = onSnapshot(ascNamequery, snapshot => {
+      const Products = [];
+      snapshot.docs.forEach(doc => {
+        Products.push(doc.data());
       });
+
+      dispatch(actions.setProducts(Products));
+    });
+
     setSnackBarOpen(true);
+
+    return () => {
+      unsub();
+    };
   }, []);
   return (
     <>

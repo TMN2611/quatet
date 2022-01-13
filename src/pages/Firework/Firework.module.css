@@ -1,14 +1,16 @@
+.fireWorkWrapper {
+  padding: 15px;
+  margin-top: 30px;
+}
 .countdownWrapper {
   display: flex;
-  padding: 0 20px;
 }
 .countdownList {
   margin: auto;
-  display: flex;
+  display: grid;
   list-style: none;
-  padding: 40px;
+  grid-template-columns: auto auto auto auto;
   border-radius: 50px;
-  border: 0.5px solid rgba(255, 255, 255, 0.733);
 }
 .countdownTitle,
 .LunarYear {
@@ -30,21 +32,65 @@
   height: 100px;
 }
 .countdownItem {
-  padding: 20px;
   cursor: pointer;
   color: #fffabc;
-  font-size: 24px;
   text-transform: uppercase;
   text-align: center;
+  font-weight: bold;
+  margin: 0 20px;
+  background-color: #1c1a1a;
+  min-width: 160px;
+  position: relative;
+}
+.countdownItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #de4429;
+  width: 10px;
+  height: 10px;
+  margin: 4px;
+  border-radius: 50%;
+}
+.timeValue {
+  font-size: 60px;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+.timeTitle {
+  padding: 20px;
+  font-size: 15px;
+  background-color: #090908;
+  position: relative;
+}
+.timeTitle::after {
+  content: ' ';
+  width: 40%;
+  background-color: #de4429;
+  height: 3px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
 }
 .toggleAudioBtn {
   width: 100%;
 }
+@media screen and (max-width: 1023.98px) {
+  .countdownList {
+    grid-template-columns: auto auto;
+  }
+}
+
 @media (max-width: 576px) {
   .countdownList {
     padding: 0;
   }
   .countdownItem {
     font-size: 17px;
+  }
+  .countdownList {
+    grid-template-columns: auto;
   }
 }

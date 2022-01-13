@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import GlobalStyle from './components/GlobalStyle';
-
+import { StoreProvider } from './store';
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </GlobalStyle>
+    <StoreProvider>
+      <GlobalStyle>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </GlobalStyle>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
