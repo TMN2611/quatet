@@ -1,0 +1,25 @@
+.container {
+  margin-top: 30px;
+}
+.inforWrapper {
+  padding-left: 40px;
+}
+.materialImage {
+  height: 300px;
+  object-fit: contain;
+}
+.materialTitle {
+  text-align: center;
+  font-weight: 400;
+  /* font-size: 40px; */
+}
+.materials {
+  margin-top: 50px;
+  padding-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .inforWrapper {
+    padding-left: 0;
+  }
+}

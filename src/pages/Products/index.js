@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { useStore } from '../../store';
+import { useStore, actions } from '../../store';
 import {
   Container,
   CardActionArea,
@@ -14,20 +14,25 @@ import {
   Box,
   Tooltip,
   IconButton,
+  ToggleButton,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import styles from './Products.module.css';
 
-export default function Products() {
+function Products() {
   const navigate = useNavigate();
   const [state, dispatch] = useStore();
-  const { products } = state;
+  const { products, carts } = state;
 
   useEffect(() => {}, []);
+
+  const handleAddToCart = product => {
+    dispatch(actions.addToCarts(product));
+  };
   return (
     <Container maxWidth={'lg'}>
-      <h2>Product</h2>
+      <h2>Tất cả sản phẩm</h2>
 
       <Grid container spacing={2}>
         {products.map((product, index) => {
@@ -92,14 +97,18 @@ export default function Products() {
                 </CardActionArea>
 
                 <CardActions>
-                  {/* <IconButton color='primary' aria-label='add to shopping cart'>
-                
-              </IconButton> */}
-
                   <Tooltip title='Thêm vào giỏ hàng'>
-                    <IconButton>
+                    <ToggleButton
+                      value='check'
+                      selected={product.isInCarts}
+                      color='primary'
+                      onChange={() => {}}
+                      onClick={() => {
+                        handleAddToCart(product);
+                      }}
+                    >
                       <AddShoppingCartIcon />
-                    </IconButton>
+                    </ToggleButton>
                   </Tooltip>
                 </CardActions>
               </Card>
@@ -112,3 +121,4 @@ export default function Products() {
     </Container>
   );
 }
+export default Products;

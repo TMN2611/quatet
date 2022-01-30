@@ -14,9 +14,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
+import ClearIcon from '@mui/icons-material/Clear';
 import { Container } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
+import { useStore, actions } from '../../store';
 
 const mobileNavLogoClass = ClassNames({
   [styles.headerLogo]: true,
@@ -30,6 +32,13 @@ const mobileHolineClass = ClassNames({
 
 export default function ButtonAppBar() {
   let navigate = useNavigate();
+  const [state, dispatch] = useStore();
+
+  const { products, carts } = state;
+  kw;
+
+  const numberPrductInCarts = carts.length;
+
   const params = useLocation();
 
   const [isFireWorkPage, setIsFireWorkPage] = useState(() => {
@@ -39,15 +48,15 @@ export default function ButtonAppBar() {
 
   const navCartClass = ClassNames({
     [styles.headerCart]: true,
-    [styles.hiddenOnMobile]: true,
+    [styles.hiddenOnMobile]: isFireWorkPage,
   });
 
   useEffect(() => {
     if (params.pathname === '/phao-hoa') return setIsFireWorkPage(true);
     else return setIsFireWorkPage(false);
-  });
+  }, [params.pathname]);
 
-  const [state, setState] = React.useState({
+  const [states, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
@@ -62,10 +71,10 @@ export default function ButtonAppBar() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setState({ ...states, [anchor]: open });
   };
 
-  const list = anchor => (
+  const listNav = anchor => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role='presentation'
@@ -102,8 +111,70 @@ export default function ButtonAppBar() {
       <Divider />
     </Box>
   );
+
+  const listCarts = anchor => (
+    <Box
+      sx={{
+        width: 300,
+      }}
+      role='presentation'
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {carts.map((item, index) => (
+          <ListItem
+            button
+            key={item.name}
+            onClick={() => {
+              navigate('/gio-hang');
+            }}
+            sx={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <img
+                src={`${item.imageUrl}`}
+                alt=''
+                style={{
+                  width: 50,
+                  height: 50,
+                  objectFit: 'cover',
+                  borderRadius: 25,
+                  marginRight: 20,
+                }}
+              />
+              <Box>
+                <ListItemText primary={item.name} />
+                <ListItemText
+                  primary={`${item.price
+                    .toString()
+                    .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} đ`}
+                  sx={{ color: 'red', fontWeight: 'bold' }}
+                />
+              </Box>
+            </Box>
+            <Box>
+              <IconButton
+                aria-label='delete'
+                size='middle'
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  dispatch(actions.deleteFromCarts(item));
+                }}
+              >
+                <ClearIcon fontSize='inherit' />
+              </IconButton>
+            </Box>
+          </ListItem>
+        ))}
+        <h2>Xem giỏ hàng</h2>
+      </List>
+      <Divider />
+    </Box>
+  );
   return (
-    <Box sx={{ flexGrow: 1, zIndex: 2 }}>
+    <Box sx={{ flexGrow: 1, zIndex: 2, marginBottom: 5 }}>
       <AppBar position='static' color='transparent'>
         <Container maxWidth='lg' className={styles.header}>
           <Toolbar disableGutters>
@@ -176,7 +247,11 @@ export default function ButtonAppBar() {
             </div>
 
             <div className={navCartClass}>
-              <Badge badgeContent={4} color='error'>
+              <Badge
+                badgeContent={carts.length}
+                color='error'
+                onClick={toggleDrawer('right', true)}
+              >
                 <AddShoppingCartIcon
                   color='action'
                   style={{ color: isFireWorkPage ? 'white' : 'black' }}
@@ -192,14 +267,27 @@ export default function ButtonAppBar() {
               Hotline
             </Button>
           </Toolbar>
+          {/* Nav mobile */}
           <div>
             <React.Fragment key={'left'}>
               <Drawer
                 anchor={'left'}
-                open={state['left']}
+                open={states['left']}
                 onClose={toggleDrawer('left', false)}
               >
-                {list('left')}
+                {listNav('left')}
+              </Drawer>
+            </React.Fragment>
+          </div>
+          {/* list Carts */}
+          <div>
+            <React.Fragment key={'right'}>
+              <Drawer
+                anchor={'right'}
+                open={states['right']}
+                onClose={toggleDrawer('right', false)}
+              >
+                {listCarts('right')}
               </Drawer>
             </React.Fragment>
           </div>

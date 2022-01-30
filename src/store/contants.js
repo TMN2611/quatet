@@ -1,1 +1,5 @@
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_CARTS = 'SET_CARTS';
+export const ADD_TO_CARTS = 'ADD_TO_CARTS';
+export const DELETE_FROM_CARTS = 'DELETE_FROM_CARTS';
+export const CHANGE_QUANTITY = 'CHANGE_QUANTITY';

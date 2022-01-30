@@ -23,6 +23,7 @@ import Products from './pages/Products';
 import Contact from './pages/Contact';
 import DetailProduct from './pages/DetailProduct';
 import Firework from './pages/Firework';
+import Carts from './pages/Carts';
 import NotFound from './pages/NotFound';
 
 // component
@@ -44,10 +45,15 @@ function App() {
     const unsub = onSnapshot(ascNamequery, snapshot => {
       const Products = [];
       snapshot.docs.forEach(doc => {
-        Products.push(doc.data());
+        Products.push({ ...doc.data(), id: doc.id, isInCarts: false });
       });
 
       dispatch(actions.setProducts(Products));
+      const jsonData = localStorage.getItem('carts');
+      const data = JSON.parse(jsonData);
+      if (data) {
+        dispatch(actions.setCarts(data));
+      }
     });
 
     setSnackBarOpen(true);
@@ -56,6 +62,7 @@ function App() {
       unsub();
     };
   }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <Header />
@@ -65,6 +72,7 @@ function App() {
         <Route path='/san-pham' element={<Products />}></Route>
         <Route path='/lien-he' element={<Contact />}></Route>
         <Route path='/phao-hoa' element={<Firework />}></Route>
+        <Route path='/gio-hang' element={<Carts />}></Route>
         <Route path='*' element={<NotFound />} />
         <Route
           path={'/san-pham/:productId'}
