@@ -35,7 +35,6 @@ export default function ButtonAppBar() {
   const [state, dispatch] = useStore();
 
   const { products, carts } = state;
-  kw;
 
   const numberPrductInCarts = carts.length;
 
