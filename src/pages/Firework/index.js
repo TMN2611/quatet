@@ -75,7 +75,7 @@ export default function Firework() {
   );
   const [isPlay, setPlay] = React.useState(true);
 
-  const goal = 'Chào Thu Phương nhé';
+  const goal = 'AN.TU.KH.TO, VI.VA.TU.KH.BA.CH.NU, CO.DU.GA.LA';
 
   const audioRef = useRef();
 

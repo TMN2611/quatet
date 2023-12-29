@@ -94,7 +94,7 @@ function App() {
             severity='error'
             sx={{ width: '100%' }}
           >
-            Chào mừng bạn đến với ZOLO
+           xin chào Thu Phương
           </Alert>
         </Snackbar>
       ) : null}
