@@ -75,7 +75,7 @@ export default function Firework() {
   );
   const [isPlay, setPlay] = React.useState(true);
 
-  const goal = 'AN.TU.KH.TO, VI.VA.TU.KH.BA.CH.NU, CO.DU.GA.LA';
+  const goal = 'AN.TU.KH.TO, VI.VA.TU.KH.BA.CH.NU, CO.DU.GA.LA, TẠM BIỆT';
 
   const audioRef = useRef();
 
