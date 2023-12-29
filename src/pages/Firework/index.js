@@ -53,16 +53,19 @@ const Countdown = ({ setCountdownTitle, goal }) => {
       clearInterval(timerId);
     };
   }, []);
+  useEffect(() => {
+    document.title = '';
+  }, []);
   return (
     <>
-      {countdownTime.map((item, index) => {
+      {/* {countdownTime.map((item, index) => {
         return (
           <li key={index} className={styles.countdownItem}>
             <div className={styles.timeValue}> {item.value} </div>
             <div className={styles.timeTitle}>{item.title} </div>
           </li>
         );
-      })}
+      })} */}
     </>
   );
 };
@@ -72,7 +75,7 @@ export default function Firework() {
   );
   const [isPlay, setPlay] = React.useState(true);
 
-  const goal = 'Chúc mừng năm mới xuân';
+  const goal = 'Chào Thu Phương nhé';
 
   const audioRef = useRef();
 
@@ -80,7 +83,7 @@ export default function Firework() {
     <div className={styles.fireWorkWrapper}>
       <Particles countdownTitle={countdownTitle} goal={goal}></Particles>
       <h2 className={styles.countdownTitle}>{countdownTitle}</h2>
-      {countdownTitle === goal ? (
+      {/* {countdownTitle === goal ? (
         <div>
           <div className={styles.LunarWrapper}>
             <img
@@ -96,7 +99,7 @@ export default function Firework() {
             />
           </div>
         </div>
-      ) : null}
+      ) : null} */}
       <ReactAudioPlayer
         src='https://dm0qx8t0i9gc9.cloudfront.net/previews/audio/BsTwCwBHBjzwub4i4/fireworks-show-looping_GJJxwH4__NWM.mp3'
         autoPlay

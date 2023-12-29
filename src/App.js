@@ -42,9 +42,9 @@ function App() {
   };
   useEffect(() => {
     const ascNamequery = query(productCollection, orderBy('name'));
-    const unsub = onSnapshot(ascNamequery, snapshot => {
+    const unsub = onSnapshot(ascNamequery, (snapshot) => {
       const Products = [];
-      snapshot.docs.forEach(doc => {
+      snapshot.docs.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id, isInCarts: false });
       });
 
@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {}, []);
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <Routes>
         <Route path='/' element={<Home />}></Route>
